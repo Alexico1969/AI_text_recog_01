@@ -1,6 +1,7 @@
 
 from os import getenv, environ
 from flask import Flask, render_template, session, request, redirect, url_for, g
+from helper import simplify, count_most, count_most_weighed, categorize
 
 
 app=Flask(__name__, static_url_path='/static')
@@ -23,6 +24,29 @@ def signup():
 def logout():
     session.pop('userid', None)
     return redirect(url_for('home_page'))
+
+@app.route('/examine', methods=["GET","POST"])
+def examine():
+    if request.method == "POST":
+        input = request.form.get("text_input")
+        simplified = simplify(input)
+        top_10 = count_most(simplified)
+        inp_small = input[:3] + " ... " + input[-3:]
+        render_template("result.html", input=inp_small, top_10=top_10)
+
+    return render_template("examine.html")
+
+@app.route('/train')
+def train():
+
+    return render_template("train.html")
+
+@app.route('/conversation')
+def conversation():
+
+    return render_template("conversation.html")
+
+
 
 # Do not alter this if statement below
 # This should stay towards the bottom of this file

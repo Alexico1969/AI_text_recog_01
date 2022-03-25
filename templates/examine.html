@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+{% set page_title="Examine" %}
+
+{% block content %}
+    <h3>Examine</h3>
+    <div class="container">
+        <form method="post">
+            <h4>What text would you like to be examined?</h4>
+            <br>
+            <textarea rows=10 cols=200 name="text_input" placeholder="paste or type text here"></textarea>
+            <br>
+            <button class="btn btn-secondary" type="submit">Submit</button>
+        </form>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+
+
+    <script>
+    $(document).ready(function(){
+        console.log('--- js file loaded ---');
+    })
+    </script>
+    <script src="{{ url_for('static', filename='javascript/home.js') }}"></script>
+{% endblock %}

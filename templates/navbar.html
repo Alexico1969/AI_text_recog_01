@@ -29,7 +29,15 @@
             {% endif %}
           </ul>
           <span class="navbar-text">
-            Navbar
+            <a class="nav-item" href="{{url_for('examine')}}">
+              Examine Text
+            </a>
+            <a class="nav-item" href="{{url_for('train')}}">
+              Train AI
+            </a>
+            <a class="nav-item" href="{{url_for('conversation')}}">
+              Conversation
+            </a>
           </span>
         </div>
       </nav>
