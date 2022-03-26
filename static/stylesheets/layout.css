@@ -18,6 +18,16 @@ p, a {
     
 }
 
+table, th, td, tr{
+    border: 1px black solid;
+    padding: 2px 5px;
+    background-color: beige;
+}
+
+th{
+    background-color: darkkhaki;
+}
+
 .nav-item{
     background-color: #111;
     color: beige;

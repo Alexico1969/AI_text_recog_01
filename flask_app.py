@@ -67,6 +67,11 @@ def train():
 def conversation():
     return render_template("conversation.html")
 
+@app.route('/dump')
+def dump():
+    ai_dict = get_ai_dict()
+    return render_template("dump.html", ai_dict=ai_dict)
+
 
 
 # Do not alter this if statement below

@@ -1,0 +1,30 @@
+{% extends 'layout.html' %}
+{% set page_title="Dump" %}
+
+{% block content %}
+    <h3>Dump</h3>
+    <br>
+    <div class="container">
+        <table>
+            <tr><th>Category</th><th>keywords</th></tr>
+            {% for key in ai_dict %}
+            <tr>
+                <td>{{key}}</td>
+                <td>{{ai_dict[key]}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        
+            
+
+    </div>
+{% endblock %}
+    
+{% block scripts %}
+    <script>
+    $(document).ready(function(){
+        console.log('--- js file loaded ---');
+    })
+    </script>
+    <script src="{{ url_for('static', filename='javascript/home.js') }}"></script>
+{% endblock %}
