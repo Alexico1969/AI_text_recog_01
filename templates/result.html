@@ -3,12 +3,57 @@
 
 {% block content %}
     <h3>Result</h3>
-    Test123
-
+    <br>
+    <div class="container">
+        <h5>Input:</h5>
+        <br>
+        <h4 class="emphasis_01">"{{input}}"</h4>
+        <br>
+        <h5>10 most frequent words in the input text:</h5>
+        <br>
+        {% for word in top_10%}
+            <span class="word">{{word}} </span>
+        {% endfor %}
+        <br><br>
+        <h5>Prediction:</h5>
+        <br>
+        <h4 class="emphasis_01">I predict the category this text falls under is: <span class="result">{{prediction}}</span></h4>
+        <br>
+        <h5>Your feedback</h5>
+        <br>
+        <div class="feedback_btns">
+            <p>The prediction was </p>
+            <button id="correct">Correct</button>
+            <button id="incorrect">Incorrect</button>
+        </div>
+        <div class="feedback">
+            <form method="POST" action="{{url_for('result')}}">
+                <p>
+                    The correct category was:
+                    <input name="input_cat" placeholder="name category" required >
+                    <button type="submit">Submit</button>
+                </p>
+            </form>
+        </div>
+        <div class="thanks">
+            <p>Thanks !</p>
+        </div>
+    </div>
 {% endblock %}
 
 {% block scripts %}
     <script>
+    $('.feedback').hide();
+    $('.thanks').hide();
+    $('#correct').click(function(){
+        $('.thanks').show();
+        $('.feedback_btns').hide();
+    })
+    $('#incorrect').click(function(){
+        $('.feedback').show();
+        $('.feedback_btns').hide();
+    })
+
     $(document).ready(function(){
         console.log('--- js file loaded ---');
     })

@@ -1,18 +1,25 @@
 todo = "todo"
 
+from db import get_ai_dict
+
 def simplify(input):
-    strip_list = ["the", "a", "to", "from", "it", "in", "not", "are", "is", "have", "has", "was", "she", "he", "of", "by"]
+    strip_list = ["at", "with", "for", "and", "or", "the", "a", "an", "be", "as", "to", "from", "it", "in", "not", "are", "is", "have", "has", "was", "she", "he", "of", "by", "on", "her", "his"]
+    punct_list = [".",",","'",":",";","(",")"]
     temp = input.lower()
     for word in strip_list:
         temp = temp.replace(word + " ", "")
+    for char in punct_list:
+        temp = temp.replace(char, "")
     output = temp
-    print(output)
     return output
 
 def get_top_10(inp_dict):
-    max_nr =  max(inp_dict, key=inp_dict.get)
-    print("max:", max_nr)
-    return max_nr
+    top_10 = []
+    for counter in range(10):
+        top_word =  max(inp_dict, key=inp_dict.get)
+        top_10.append(top_word)
+        inp_dict.pop(top_word)
+    return top_10
 
 def count_most(input):
     words = input.split(" ")
@@ -22,13 +29,30 @@ def count_most(input):
             result[word] += 1
         else:
             result[word] = 1
-    print("result: ", result)
-    print("max:", get_top_10(result))
-    return result
+    top_10 = get_top_10(result)
+    return top_10
 
-def count_most_weighed(input):
-    print(todo)
 
-def categorize(input):
-    print(todo)
+def categorize(top_10_input, input_text):
+    prediction = ""
+    prediction_dict = {}
+    ai_dict = get_ai_dict()
+    for item in ai_dict:
+        prediction_dict[item] = 0
+        key_words = ai_dict[item].split(" ")
+        for key_word in key_words:
+            if key_word in top_10_input:
+                prediction_dict[item] += 5
+                print(f"** key word dected in top-10: {key_word}")
+            if key_word in input_text:
+                prediction_dict[item] += 1
+                print(f"** key word dected in text: {key_word}")
+    
+    prediction = max(prediction_dict, key=prediction_dict.get)
+
+    print()
+    print(prediction_dict)
+    print()
+    print("prediction:", prediction)
+    return prediction
     

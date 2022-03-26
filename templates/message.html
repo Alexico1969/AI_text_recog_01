@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+{% set page_title="Message" %}
+
+{% block content %}
+    <h3>Message</h3>
+    <br>
+    <div class="container">
+        <h5>{{msg}}</h2>
+    </div>
+{% endblock %}
+    
+{% block scripts %}
+    <script>
+    $(document).ready(function(){
+        console.log('--- js file loaded ---');
+    })
+    </script>
+    <script src="{{ url_for('static', filename='javascript/home.js') }}"></script>
+{% endblock %}
