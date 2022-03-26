@@ -41,6 +41,11 @@ def examine():
         print("-----------------------")
         print()
         input = request.form.get("text_input")
+        input_words = input.split(" ")
+        length = len(input_words)
+        if length < 20:
+            msg = f"{length} words is not enough to perform tasks on"
+            return render_template("message.html", msg=msg)
         simplified = simplify(input)
         print("simplyfied: ", simplified)
         top_10 = count_most(simplified)

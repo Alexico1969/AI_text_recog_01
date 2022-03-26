@@ -1,12 +1,10 @@
-todo = "todo"
-
+from stop_words import stop_words
 from db import get_ai_dict
 
 def simplify(input):
-    strip_list = ["at", "with", "for", "and", "or", "the", "a", "an", "be", "as", "to", "from", "it", "in", "not", "are", "is", "have", "has", "was", "she", "he", "of", "by", "on", "her", "his"]
     punct_list = [".",",","'",":",";","(",")"]
     temp = input.lower()
-    for word in strip_list:
+    for word in stop_words:
         temp = temp.replace(word + " ", "")
     for char in punct_list:
         temp = temp.replace(char, "")
