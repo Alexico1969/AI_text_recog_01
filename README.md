@@ -1,4 +1,5 @@
+A small demo on AI with Python.
 
+Powered by Flask to turn it into a website.
 
-If you are getting import errors and are working in a pipenv shell, 
-try: pipenv install
+Small YouTube clip that explains it all : https://www.youtube.com/watch?v=31m7hNxGJhc 
