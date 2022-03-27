@@ -69,3 +69,11 @@ th{
     border-radius: 4px;
     right: 100px;
 }
+
+.textarea_01{
+    max-width: 90%;
+}
+
+#random_text{
+    margin-left: 100px;
+}

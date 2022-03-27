@@ -5,9 +5,17 @@
     <h3>Examine</h3>
     <div class="container">
         <form method="post">
-            <h4>What text would you like to be examined?</h4>
+            <h4>What text would you like to be examined? <button class="btn btn-info" id="random_text">Get random text</button></h4>
             <br>
-            <textarea rows=10 cols=200 name="text_input" placeholder="paste or type text here" minlength="15" required></textarea>
+            <textarea rows=10 
+                      cols=200 
+                      id="input"
+                      class="textarea_01"
+                      name="text_input" 
+                      placeholder="paste or type text here" 
+                      minlength="15"
+                      required></textarea>
+            
             <br>
             <button class="btn btn-secondary" type="submit">Submit</button>
         </form>
@@ -21,6 +29,38 @@
     $(document).ready(function(){
         console.log('--- js file loaded ---');
     })
+
+    function get_random_text(APY_key){
+        $.ajax({
+            //url: `https://newsdata.io/api/1/news?apikey=${API_key}&country=us`,
+            url: `https://newsdata.io/api/1/news?apikey=${API_key}&language=en`,
+            success: function(result){
+                console.log("response: ", result)
+                var text = "";
+                while (text = ""){}
+                  var rnd = Math.floor(Math.random() * 9);
+                  if (result.results[rnd].full_description){
+                    text = result.results[rnd].full_description;
+                  }
+                                  
+                console.log("text: ", text);
+                $("#input").val(text);
+            }
+        });
+    }
+
+    $("#random_text").click( function(event){
+        event.preventDefault();
+        API_key = localStorage.getItem("API-key");
+        console.log(API_key);
+        if (API_key){
+            get_random_text(API_key);
+        } else {
+            API_key=prompt("Please provide https://newsdata.io/ API key")
+            localStorage.setItem("API-key", API_key);
+            get_random_text(API_key);
+        } 
+    });
     </script>
-    <script src="{{ url_for('static', filename='javascript/home.js') }}"></script>
+    
 {% endblock %}
