@@ -2,7 +2,7 @@
 from os import getenv, environ
 from flask import Flask, render_template, session, request, redirect, url_for, g
 from helper import simplify, count_most, categorize
-from db import create_tables, add_topic, add_initial_ai_data, get_ai_dict, add_knowledge, update_ai
+from db import create_tables, add_topic, add_initial_ai_data, get_ai_dict, add_knowledge, update_ai, repair_db
 
 
 app=Flask(__name__, static_url_path='/static')
@@ -99,6 +99,11 @@ def conversation():
 def dump():
     ai_dict = get_ai_dict()
     return render_template("dump.html", ai_dict=ai_dict)
+
+@app.route('/repair')
+def repair():
+    result = repair_db()
+    return render_template("message.html", msg=result)
 
 
 # Do not alter this if statement below

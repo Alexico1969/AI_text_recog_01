@@ -53,9 +53,18 @@ def add_knowledge(category, top_10):
         output = "The following category was added: "
     for word in top_10:
             temp_str += " " + word
+    temp_str.replace("  "," ")
     add_topic(category, temp_str)
     return output
         
 def update_ai(category, new_string):
-      sql.execute("update topics set word_list=? where name=?", (new_string, category) )
-      sqlite.commit()
+    sql.execute("update topics set word_list=? where name=?", (new_string, category) )
+    sqlite.commit()
+
+def repair_db():
+    ai_dict = get_ai_dict()
+    for cat in ai_dict:
+        temp_str = ai_dict[cat]
+        temp_str.replace("  "," ")
+        update_ai(cat, temp_str)
+    return "The database has been repaired"
