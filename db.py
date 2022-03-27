@@ -52,8 +52,7 @@ def add_knowledge(category, top_10):
     else:
         output = "The following category was added: "
     for word in top_10:
-            temp_str += " " + word
-    temp_str.replace("  "," ")
+        temp_str += word + " "
     add_topic(category, temp_str)
     return output
         
