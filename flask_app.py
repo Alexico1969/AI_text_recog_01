@@ -10,7 +10,7 @@ app=Flask(__name__, static_url_path='/static')
 app.secret_key = 'Bruce Wayne is Batman'
 
 create_tables()
-#add_initial_ai_data()
+add_initial_ai_data()
 
 top_10 = []
 
@@ -77,6 +77,10 @@ def train():
         word = action_list[1]
         temp_string = ai_dict[category]
         new_string = temp_string.replace(word + " ","")
+        if temp_string == new_string:
+            new_string = temp_string.replace(word,"")
+            new_string = new_string[:-1]
+            print(f"new_string: *{new_string}*")
         update_ai(category, new_string)
         ai_dict = get_ai_dict()
 

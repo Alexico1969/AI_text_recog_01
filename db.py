@@ -31,7 +31,7 @@ def add_initial_ai_data():
     add_topic("miscellanious", "general xylophone enigma")
     add_topic("geopolitics", "russia china putin anthony blinken vladimir putin africa asia europe xi jinping")
     add_topic("infrastructure", "car road roads interstate turnpike railroad airport wheel driver")
-    add_topic("social media", "facebook fwitter instagram tweet post youtube whatsapp account reply comment")
+    add_topic("social_media", "facebook fwitter instagram tweet post youtube whatsapp account reply comment")
     add_topic("celebrities", "famous oscar movie actor actress hollywood singer album ep song interview")
     return True
 
@@ -53,6 +53,8 @@ def add_knowledge(category, top_10):
         output = "The following category was added: "
     for word in top_10:
         temp_str += word + " "
+    l = len(temp_str)
+    temp_str = temp_str[:l-1]
     add_topic(category, temp_str)
     return output
         
