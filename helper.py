@@ -2,10 +2,10 @@ from stop_words import stop_words
 from db import get_ai_dict
 
 def simplify(input):
-    punct_list = [".",",","'",":",";","(",")"]
+    punct_list = [".",",","'",":",";","(",")","%"]
     temp = input.lower()
     for word in stop_words:
-        temp = temp.replace(word + " ", "")
+        temp = temp.replace(" " + word + " ", " ")
     for char in punct_list:
         temp = temp.replace(char, "")
     output = temp
@@ -15,7 +15,8 @@ def get_top_10(inp_dict):
     top_10 = []
     for counter in range(10):
         top_word =  max(inp_dict, key=inp_dict.get)
-        top_10.append(top_word)
+        if len(top_word) > 1:
+            top_10.append(top_word)
         inp_dict.pop(top_word)
     return top_10
 

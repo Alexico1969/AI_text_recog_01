@@ -55,6 +55,7 @@ def add_knowledge(category, top_10):
         temp_str += word + " "
     l = len(temp_str)
     temp_str = temp_str[:l-1]
+    print("temp_str: ", temp_str)
     add_topic(category, temp_str)
     return output
         
@@ -69,3 +70,9 @@ def repair_db():
         temp_str.replace("  "," ")
         update_ai(cat, temp_str)
     return "The database has been repaired"
+
+def clear_db():
+    sql.execute('''drop table topics''')
+    create_tables()
+    add_initial_ai_data()
+    return "Table 'topics' is reset."

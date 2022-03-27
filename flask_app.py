@@ -2,7 +2,7 @@
 from os import getenv, environ
 from flask import Flask, render_template, session, request, redirect, url_for, g
 from helper import simplify, count_most, categorize
-from db import create_tables, add_initial_ai_data, get_ai_dict, add_knowledge, update_ai, repair_db
+from db import create_tables, add_initial_ai_data, get_ai_dict, add_knowledge, update_ai, repair_db, clear_db
 
 
 app=Flask(__name__, static_url_path='/static')
@@ -107,6 +107,11 @@ def dump():
 @app.route('/repair')
 def repair():
     result = repair_db()
+    return render_template("message.html", msg=result)
+
+@app.route('/clear')
+def clear():
+    result = clear_db()
     return render_template("message.html", msg=result)
 
 
