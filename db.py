@@ -13,14 +13,11 @@ def create_tables():
         name text,
         word_list text)
     ''')
-    sql.execute('''create table if not exists irrelevant_words
-        (topic_id integer primary key autoincrement,
-        word text)
-    ''')
-    sql.execute('''create table if not exists punctuation
-        (topic_id integer primary key autoincrement,
+
+    sql.execute('''create table if not exists statistics
+        (stat_id integer primary key autoincrement,
         symbol text)
-    ''')    
+    ''')
 
     print("tables are created")
     
@@ -59,3 +56,6 @@ def add_knowledge(category, top_10):
     add_topic(category, temp_str)
     return output
         
+def update_ai(category, new_string):
+      sql.execute("update topics set word_list=? where name=?", (new_string, category) )
+      sqlite.commit()

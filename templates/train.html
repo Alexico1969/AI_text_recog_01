@@ -3,13 +3,35 @@
 
 {% block content %}
     <h3>Train</h3>
+    <br>
+    <div class="container">
+        <form method="POST">
+            <table>
+                <tr><th>Category</th><th>keywords</th></tr>
+                {% for key in ai_dict %}
+                <tr>
+                    <td>{{key}}</td>
+                    <td>
+                        {% for word in ai_dict[key] %}
+                            <button type="submit" name="word" value="{{key}} {{word}}">{{word}}</button>
+                        {% endfor %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </form>
+        <br>
+        <h3>Click on the words to remove them from the ai database</h3>
+        
+            
+
+    </div>
 {% endblock %}
 
 {% block scripts %}
     <script>
     $(document).ready(function(){
-        console.log('--- js file loaded ---');
+
     })
     </script>
-    <script src="{{ url_for('static', filename='javascript/home.js') }}"></script>
-{% endblock %}
+   {% endblock %}

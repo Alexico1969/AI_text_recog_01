@@ -2,7 +2,7 @@
 from os import getenv, environ
 from flask import Flask, render_template, session, request, redirect, url_for, g
 from helper import simplify, count_most, categorize
-from db import create_tables, add_topic, add_initial_ai_data, get_ai_dict, add_knowledge
+from db import create_tables, add_topic, add_initial_ai_data, get_ai_dict, add_knowledge, update_ai
 
 
 app=Flask(__name__, static_url_path='/static')
@@ -51,7 +51,7 @@ def examine():
         top_10 = count_most(simplified)
         wl = input.split(" ")
         inp_small = f"{wl[0]} {wl[1]} {wl[2]} ... {wl[-3]} {wl[-2]} {wl[-1]}"
-        prediction = categorize(top_10, simplified)
+        prediction = categorize(top_10, simplified).replace("_"," ")
         return render_template("result.html", input=inp_small, top_10=top_10, prediction=prediction)
 
     return render_template("examine.html")
@@ -60,13 +60,36 @@ def examine():
 def result():
     global top_10
     category = request.form.get('input_cat')
+    category = category.replace(" ","_")
     result = add_knowledge(category, top_10)
     msg = f"{result} {category}"
     return render_template("message.html", msg=msg)
 
-@app.route('/train')
+@app.route('/train', methods=["GET","POST"])
 def train():
-    return render_template("train.html")
+    ai_dict = get_ai_dict()
+
+    if request.method == "POST":
+        action = request.form.get("word")
+        print("action:", action)
+        action_list = action.split(" ")
+        category = action_list[0]
+        word = action_list[1]
+        temp_string = ai_dict[category]
+        new_string = temp_string.replace(word + " ","")
+        update_ai(category, new_string)
+        ai_dict = get_ai_dict()
+
+    
+    new_dict = {}
+    for el in ai_dict:
+        temp_list = []
+        words_splitted = ai_dict[el].split(" ")
+        new_dict[el] = words_splitted
+
+    return render_template("train.html", ai_dict=new_dict)
+
+   
 
 @app.route('/conversation')
 def conversation():
@@ -76,7 +99,6 @@ def conversation():
 def dump():
     ai_dict = get_ai_dict()
     return render_template("dump.html", ai_dict=ai_dict)
-
 
 
 # Do not alter this if statement below
