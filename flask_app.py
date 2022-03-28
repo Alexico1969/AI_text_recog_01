@@ -115,7 +115,7 @@ def clear():
     return render_template("message.html", msg=result)
 
 @app.route('/query', methods=["GET","POST"])
-def clear():
+def query():
     if request.method == 'POST':
         query = request.form.get('query')
         result = execute_query()
