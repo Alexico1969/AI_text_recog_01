@@ -52,7 +52,6 @@
     $("#random_text").click( function(event){
         event.preventDefault();
         API_key = localStorage.getItem("API-key");
-        console.log(API_key);
         if (API_key){
             get_random_text(API_key);
         } else {
