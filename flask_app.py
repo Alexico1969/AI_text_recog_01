@@ -124,6 +124,16 @@ def query():
 
     return render_template("query.html")
 
+@app.route('/clear_empty')
+def clear_empty():
+    check_empty_categories()
+    msg = "Checked empty categories"
+    return render_template("message.html", msg=msg)
+
+
+
+
+
 # Do not alter this if statement below
 # This should stay towards the bottom of this file
 if __name__ == "__main__":
