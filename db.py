@@ -76,3 +76,8 @@ def clear_db():
     create_tables()
     add_initial_ai_data()
     return "Table 'topics' is reset."
+
+def execute_query(query):
+    sql.execute(query)
+    sqlite.commit()
+    return f"Query '{query}' was executed"

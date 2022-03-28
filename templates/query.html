@@ -1,11 +1,16 @@
 {% extends 'layout.html' %}
-{% set page_title="Message" %}
+{% set page_title="Fix" %}
 
 {% block content %}
-    <h3>Message</h3>
+    <h3>Query</h3>
     <br>
     <div class="container">
-        <h5>{{msg}}</h5>
+        <h5>Query</h5>
+        <form method="post">
+            <h4>enter query</h4>
+            <input type="text" name="query"> 
+            <button class="btn btn-secondary" type="submit">Submit</button>            
+        </form>
     </div>
 {% endblock %}
     

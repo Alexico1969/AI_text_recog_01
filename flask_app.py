@@ -2,7 +2,7 @@
 from os import getenv, environ
 from flask import Flask, render_template, session, request, redirect, url_for, g
 from helper import simplify, count_most, categorize
-from db import create_tables, add_initial_ai_data, get_ai_dict, add_knowledge, update_ai, repair_db, clear_db
+from db import create_tables, add_initial_ai_data, get_ai_dict, add_knowledge, update_ai, repair_db, clear_db, execute_query
 
 
 app=Flask(__name__, static_url_path='/static')
@@ -114,6 +114,14 @@ def clear():
     result = clear_db()
     return render_template("message.html", msg=result)
 
+@app.route('/query', methods=["GET","POST"])
+def clear():
+    if request.method == 'POST':
+        query = request.form.get('query')
+        result = execute_query()
+        return render_template("message.html", msg=result)
+
+    return render_template("query.html")
 
 # Do not alter this if statement below
 # This should stay towards the bottom of this file
