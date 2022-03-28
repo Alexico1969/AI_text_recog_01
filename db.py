@@ -81,3 +81,16 @@ def execute_query(query):
     sql.execute(query)
     sqlite.commit()
     return f"Query '{query}' was executed"
+
+def check_empty_categories():
+    counter = 0
+    ai_dict = get_ai_dict()
+    for cat in ai_dict:
+        temp_str = ai_dict[cat]
+        if len(temp_str) < 3:
+            sql.execute('''delete from topics where name=?''',  (cat) )
+            sqlite.commit()
+            counter += 1
+    msg = f"{counter} empty categories were removed"
+    print(msg)
+    return

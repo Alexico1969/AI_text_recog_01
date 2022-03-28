@@ -2,7 +2,7 @@
 from os import getenv, environ
 from flask import Flask, render_template, session, request, redirect, url_for, g
 from helper import simplify, count_most, categorize
-from db import create_tables, add_initial_ai_data, get_ai_dict, add_knowledge, update_ai, repair_db, clear_db, execute_query
+from db import create_tables, add_initial_ai_data, get_ai_dict, add_knowledge, update_ai, repair_db, clear_db, execute_query,check_empty_categories
 
 
 app=Flask(__name__, static_url_path='/static')
@@ -11,6 +11,7 @@ app.secret_key = 'Bruce Wayne is Batman'
 
 create_tables()
 #add_initial_ai_data()
+check_empty_categories()
 
 top_10 = []
 
