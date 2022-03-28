@@ -88,7 +88,7 @@ def check_empty_categories():
     for cat in ai_dict:
         temp_str = ai_dict[cat]
         if len(temp_str) < 3:
-            sql.execute('''delete from topics where name=?''',  (cat) )
+            sql.execute('''delete from topics where name=?''',  [cat] )
             sqlite.commit()
             counter += 1
     msg = f"{counter} empty categories were removed"
