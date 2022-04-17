@@ -8,7 +8,7 @@
             <h4>What text would you like to be examined?
                 <div id="newsButtons">
                     <button class="btn btn-info" id="random_text">Get random text</button>
-                    <a href="https://newsapi.org/" target="_blank"><button type="button" class="btn btn-primary">Obtain API key</button></a>
+                    <a href="https://gnews.io/dashboard" target="_blank"><button type="button" class="btn btn-primary">Obtain API key</button></a>
                 </div>
             </h4>
             <br>
@@ -42,7 +42,7 @@
         $.ajax({
             //url: `https://newsdata.io/api/1/news?apikey=${API_key}&country=us`,
             url: `
-https://newsapi.org/v2/everything?q=a&language=en&sortBy=publishedAt&apiKey=${API_key}`,
+            https://gnews.io/api/v4/search?q=a&lang=en&token=${API_key}`,
             success: function(result){
                 console.log("response: ", result)
                 var text = "";
