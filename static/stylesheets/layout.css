@@ -77,3 +77,12 @@ th{
 #random_text{
     margin-left: 100px;
 }
+
+.link{
+    background-color: white;
+    color: black;
+    font-weight: bold;
+    font-size: 120%;
+    padding: 5px 20px;
+    margin-top: 10px;
+}

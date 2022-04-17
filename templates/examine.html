@@ -5,9 +5,11 @@
     <h3>Examine</h3>
     <div class="container">
         <form method="post">
-            <h4>What text would you like to be examined? 
-                <button class="btn btn-info" id="random_text">Get random text</button>
-                <a href="https://newsdata.io/register" target="_blank"><button type="button" class="btn btn-primary">Obtain API key</button></a>
+            <h4>What text would you like to be examined?
+                <div id="newsButtons">
+                    <button class="btn btn-info" id="random_text">Get random text</button>
+                    <a href="https://newsapi.org/" target="_blank"><button type="button" class="btn btn-primary">Obtain API key</button></a>
+                </div>
             </h4>
             <br>
             <textarea rows=10 
@@ -39,29 +41,31 @@
     function get_random_text(APY_key){
         $.ajax({
             //url: `https://newsdata.io/api/1/news?apikey=${API_key}&country=us`,
-            url: `https://newsdata.io/api/1/news?apikey=${API_key}&language=en`,
+            url: `
+https://newsapi.org/v2/everything?q=a&language=en&from=2022-03-17&sortBy=publishedAt&apiKey=${API_key}`,
             success: function(result){
                 console.log("response: ", result)
                 var text = "";
                 while (text = ""){}
                   var rnd = Math.floor(Math.random() * 9);
-                  if (result.results[rnd].full_description){
-                    text = result.results[rnd].full_description;
+                  if (result.articles[rnd].url){
+                    url = result.articles[rnd].url;
                   }
                                   
-                console.log("text: ", text);
-                $("#input").val(text);
+                console.log("url: ", text);
+                $('#newsButtons').append(`<a href="${url}" target="_blank"><span class="link">Go to news site</span></a>`)
             }
         });
     }
 
     $("#random_text").click( function(event){
         event.preventDefault();
+        //localStorage.removeItem("API-key");
         API_key = localStorage.getItem("API-key");
         if (API_key){
             get_random_text(API_key);
         } else {
-            API_key=prompt("Please provide https://newsdata.io/ API key")
+            API_key=prompt("Please provide https://newsapi.org/ API key")
             localStorage.setItem("API-key", API_key);
             get_random_text(API_key);
         } 
