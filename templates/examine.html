@@ -42,7 +42,7 @@
         $.ajax({
             //url: `https://newsdata.io/api/1/news?apikey=${API_key}&country=us`,
             url: `
-https://newsapi.org/v2/everything?q=a&language=en&from=2022-03-17&sortBy=publishedAt&apiKey=${API_key}`,
+https://newsapi.org/v2/everything?q=a&language=en&sortBy=publishedAt&apiKey=${API_key}`,
             success: function(result){
                 console.log("response: ", result)
                 var text = "";
