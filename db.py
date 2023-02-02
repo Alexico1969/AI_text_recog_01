@@ -1,6 +1,6 @@
 import sqlite3, os
 from flask import g
-import psycopg2
+#import psycopg2
 from urllib import parse
 
 #sqlite = sqlite3.connect('approot/ai.db', check_same_thread=False)

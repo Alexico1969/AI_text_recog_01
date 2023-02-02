@@ -62,7 +62,8 @@
         event.preventDefault();
         //localStorage.removeItem("API-key");
         API_key = localStorage.getItem("API-key");
-        if (API_key){
+        console.log("API_KEY = ", API_key);
+        if (API_key && API_key != "null"){
             get_random_text(API_key);
         } else {
             API_key=prompt("Please provide https://gnews.io/ API key")
